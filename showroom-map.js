@@ -21,3 +21,12 @@ mapControls.addEventListener('click', event => {
   mapFrame.src = url.href;
 });
 mapControls.hidden = false;
+
+for (const link of document.querySelectorAll('[data-showroom-map]')) {
+  link.addEventListener('click', () => {
+    document.getElementById('showroomMapPanel').open = true;
+    const button = Array.from(mapControls.querySelectorAll('[data-location]'))
+      .find(option => option.dataset.location === link.dataset.showroomMap);
+    button?.click();
+  });
+}

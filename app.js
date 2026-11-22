@@ -452,11 +452,14 @@ function toast(value) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => { message.hidden = true; }, 1900);
 }
-function showSelection(brand, category = '', collection = '') {
-  byId('search').value = '';
+function resetCatalogPrice() {
   byId('priceRange').value = '';
   byId('priceFrom').value = '';
   byId('priceTo').value = '';
+}
+function showSelection(brand, category = '', collection = '') {
+  byId('search').value = '';
+  resetCatalogPrice();
   byId('catalogSort').value = '';
   byId('category').value = category;
   refreshCatalog(true,collection,brand);
@@ -474,7 +477,8 @@ function initCatalog() {
     logo.src = directory.logo;
     logo.alt = directory.name;
     const homeLink = node('a');
-    homeLink.href = '#top';
+    homeLink.href = './#top';
+    homeLink.setAttribute('data-home-link','');
     homeLink.setAttribute('aria-label',directory.name + ' — главная');
     homeLink.append(logo);
     header.append(homeLink);
@@ -625,9 +629,9 @@ function renderActiveFilters() {
     badge.setAttribute('aria-label','Снять фильтр: ' + label);
     badges.push(badge);
   }
-  byId('filterToggle').textContent = badges.length ? 'Фильтры (' + badges.length + ')' : 'Фильтры';
-  filterBar.hidden = badges.length === 0 && !byId('search').value.trim();
-  filterBar.replaceChildren(...badges,action('Сбросить всё',() => showSelection(''),'filterReset'));
+  filterBar.hidden = badges.length === 0;
+  filterBar.replaceChildren(...badges);
+  byId('filterReset').hidden = badges.length === 0 && !byId('search').value.trim();
 }
 function renderCatalog() {
   const query = byId('search').value.trim().toLocaleLowerCase('ru');
@@ -658,7 +662,9 @@ function renderCatalog() {
     (skuQuery ? item.sku : item.name + ' ' + item.sku).toLocaleLowerCase('ru').includes(search)
   ));
   if (!shuffleCategory) {
-    products.sort((a,b) => Number(b.brand === primaryBrand) - Number(a.brand === primaryBrand));
+    const isExactSku = item => search && item.sku.toLocaleLowerCase('ru') === search ? 1 : 0;
+    products.sort((a,b) => isExactSku(b) - isExactSku(a) ||
+      Number(b.brand === primaryBrand) - Number(a.brand === primaryBrand));
   }
   byId('empty').hidden = !catalog.products.length || products.length > 0;
   byId('catalogTitle').textContent = category || 'Каталог';
@@ -668,7 +674,6 @@ function renderCatalog() {
   if (categoryPhotoSource) categoryPhoto.src = categoryPhotoSource;
   const count = products.length.toLocaleString('ru');
   byId('catalogStatus').textContent = catalog.products.length ? 'Товаров найдено: ' + count : catalogMessage;
-  byId('filterResults').textContent = 'Показать товары (' + count + ')';
   const grid = byId('products');
   const visibleLimit = catalogPageLimit(catalogColumns,catalogPages);
   byId('moreProducts').hidden = products.length <= visibleLimit;
@@ -749,7 +754,7 @@ function renderCart() {
   byId('basket').setAttribute('aria-label', count ? 'Корзина, товаров: ' + count : 'Корзина');
   byId('count').textContent = count;
   byId('count').hidden = count === 0;
-  byId('cartTitle').textContent = consultation ? 'Консультация' : 'Корзина';
+  byId('cartTitle').textContent = consultation ? 'Заказать звонок' : 'Корзина';
   byId('cartItems').hidden = consultation;
   byId('total').hidden = consultation;
   byId('cartItems').replaceChildren(...rows);
@@ -779,13 +784,41 @@ function openRequest(isConsultation, item = null) {
   byId('cartDialog').showModal();
 }
 byId('basket').addEventListener('click',() => openRequest(false));
+const requestDialog = byId('cartDialog');
+let startedOnBackdrop = false;
+function isRequestBackdrop(event) {
+  const bounds = requestDialog.getBoundingClientRect();
+  return event.target === requestDialog && (
+    event.clientX < bounds.left || event.clientX >= bounds.right ||
+    event.clientY < bounds.top || event.clientY >= bounds.bottom
+  );
+}
+requestDialog.addEventListener('pointerdown', event => {
+  startedOnBackdrop = isRequestBackdrop(event);
+});
+requestDialog.addEventListener('click', event => {
+  if (startedOnBackdrop && isRequestBackdrop(event)) requestDialog.close();
+  startedOnBackdrop = false;
+});
+
 for (const link of document.querySelectorAll('[data-consultation]')) {
   link.addEventListener('click',event => {
     event.preventDefault();
     openRequest(true);
   });
 }
-for (const id of ['search','color','type','priceRange','priceFrom','priceTo']) byId(id).addEventListener('input',() => {
+byId('search').addEventListener('input',() => {
+  if (byId('search').value.trim()) {
+    byId('category').value = '';
+    resetCatalogPrice();
+    if (location.hash.startsWith(catalogHash)) history.replaceState(history.state,'','#catalog');
+    refreshCatalog(true,'','');
+    return;
+  }
+  catalogPages = 1;
+  renderCatalog();
+});
+for (const id of ['color','type','priceRange','priceFrom','priceTo']) byId(id).addEventListener('input',() => {
   catalogPages = 1;
   renderCatalog();
 });
@@ -802,24 +835,27 @@ function setCompactSections() {
 }
 setCompactSections();
 compactScreen.addEventListener('change',setCompactSections);
-for (const [buttonId,panelId] of [['mobileMenuToggle','siteNav'],['filterToggle','catalogFilters']]) {
-  const toggle = byId(buttonId);
-  const panel = byId(panelId);
-  toggle.addEventListener('click',() => {
-    const open = toggle.getAttribute('aria-expanded') !== 'true';
-    toggle.setAttribute('aria-expanded',String(open));
-    panel.classList.toggle('is-open',open);
-  });
-  if (panelId === 'siteNav') panel.addEventListener('click',event => {
-    if (!event.target.closest('a')) return;
-    toggle.setAttribute('aria-expanded','false');
-    panel.classList.remove('is-open');
-  });
+const compactContacts = window.matchMedia('(max-width: 1080px)');
+function setContactLayout() {
+  byId('headerLocations').open = !compactContacts.matches;
 }
-byId('filterResults').addEventListener('click',() => {
-  const toggle = byId('filterToggle');
-  toggle.click();
-  toggle.focus();
+setContactLayout();
+compactContacts.addEventListener('change',setContactLayout);
+const menuToggle = byId('mobileMenuToggle');
+const siteNav = byId('siteNav');
+menuToggle.addEventListener('click',() => {
+  const open = menuToggle.getAttribute('aria-expanded') !== 'true';
+  menuToggle.setAttribute('aria-expanded',String(open));
+  siteNav.classList.toggle('is-open',open);
+});
+siteNav.addEventListener('click',event => {
+  if (!event.target.closest('a')) return;
+  menuToggle.setAttribute('aria-expanded','false');
+  siteNav.classList.remove('is-open');
+});
+byId('filterReset').addEventListener('click',() => {
+  showSelection('');
+  byId('search').focus({preventScroll:true});
 });
 byId('moreProducts').addEventListener('click',() => {
   catalogPages += 1;
@@ -840,6 +876,50 @@ new ResizeObserver(() => {
   renderCatalog();
 }).observe(productGrid);
 
+const reloadStorageKey = 'storefront-reload:' + location.pathname;
+let savedPage = null;
+if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+  try {
+    savedPage = JSON.parse(sessionStorage.getItem(reloadStorageKey));
+  } catch {}
+}
+const reloadPage = savedPage?.hash === location.hash ? savedPage : null;
+const catalogFields = ['search','category','brand','collection','color','type','priceRange','priceFrom','priceTo','catalogSort'];
+const shuffleSeed = reloadPage?.shuffleSeed ?? Math.floor(Math.random() * 2 ** 32);
+if (reloadPage) history.scrollRestoration = 'manual';
+
+window.addEventListener('pagehide', () => {
+  const catalogTop = byId('catalog').getBoundingClientRect().top;
+  const inCatalog = !document.body.classList.contains('productRoute') &&
+    catalogTop <= 0 && byId('catalog').getBoundingClientRect().bottom > 0;
+  const state = {
+    hash: location.hash,
+    top: window.scrollY,
+    catalogOffset: inCatalog ? -catalogTop : null,
+    filters: Object.fromEntries(catalogFields.map(id => [id,byId(id).value])),
+    catalogPages,
+    catalogReturn,
+    shuffleSeed: inCatalog || catalogReturn ? shuffleSeed : null,
+  };
+  try {
+    sessionStorage.setItem(reloadStorageKey,JSON.stringify(state));
+  } catch {}
+});
+
+function restoreCatalogAfterReload(state) {
+  for (const id of ['search','category','priceRange','priceFrom','priceTo','catalogSort']) {
+    byId(id).value = state.filters[id] ?? '';
+  }
+  refreshCatalog(true,state.filters.collection,state.filters.brand);
+  for (const id of ['color','type']) {
+    const value = state.filters[id] ?? '';
+    if ([...byId(id).options].some(option => option.value === value)) byId(id).value = value;
+  }
+  catalogPages = state.catalogPages || 1;
+  catalogReturn = state.catalogReturn;
+  renderCatalog();
+}
+
 async function loadPublishedCatalog() {
   try {
     const response = await fetch('./catalog-2026-09-11.json');
@@ -850,8 +930,10 @@ async function loadPublishedCatalog() {
     components = catalog.products.filter(componentCategory);
     storefrontProducts = catalog.products.filter(item => !componentCategory(item));
     shuffledCatalogProducts = [...storefrontProducts];
+    let random = shuffleSeed;
     for (let index = shuffledCatalogProducts.length - 1; index > 0; index--) {
-      const other = Math.floor(Math.random() * (index + 1));
+      random = (Math.imul(1664525, random) + 1013904223) >>> 0;
+      const other = Math.floor(random / 2 ** 32 * (index + 1));
       [shuffledCatalogProducts[index], shuffledCatalogProducts[other]] =
         [shuffledCatalogProducts[other], shuffledCatalogProducts[index]];
     }
@@ -922,9 +1004,29 @@ document.addEventListener('visibilitychange', scheduleBanner);
 bannerControls.hidden = false;
 updateBannerPause();
 
+document.addEventListener('click',event => {
+  if (event.defaultPrevented || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  if (!event.target.closest('[data-home-link]')) return;
+  event.preventDefault();
+  catalogReturn = null;
+  if (location.hash !== '#top') location.hash = '#top';
+  window.scrollTo({top:0,behavior:'instant'});
+});
+
 window.addEventListener('hashchange', syncProductRoute);
 syncProductRoute();
-loadPublishedCatalog().then(() => {
+loadPublishedCatalog().then(async () => {
   productDataReady = true;
-  if ([productHash,catalogHash].some(prefix => window.location.hash.startsWith(prefix))) syncProductRoute();
+  const restore = reloadPage && reloadPage.hash === location.hash;
+  if (restore) restoreCatalogAfterReload(reloadPage);
+  if (location.hash.startsWith(productHash) || (!restore && location.hash.startsWith(catalogHash))) syncProductRoute();
+  if (!restore) return;
+  await document.fonts.ready;
+  window.requestAnimationFrame(() => {
+    if (location.hash !== reloadPage.hash) return;
+    const top = reloadPage.catalogOffset === null ? reloadPage.top :
+      window.scrollY + byId('catalog').getBoundingClientRect().top + reloadPage.catalogOffset;
+    window.scrollTo({top,behavior:'instant'});
+    history.scrollRestoration = 'auto';
+  });
 });

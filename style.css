@@ -479,7 +479,7 @@ footer{padding-right:max(5vw,110px)}
 #showrooms { margin-block-start: 24px; }
 .catalogHead { justify-content: flex-start; align-items: baseline; margin-bottom: 10px; }
 .catalogHead p { margin: 0; font-size: .875rem; }
-#catalogFiltersTitle { margin: 0; font-size: 1rem; }
+#catalogFiltersTitle { margin: 0; font-size: .94rem; font-weight: 600; }
 
 #products > .product:only-child {
   width: min(100%, 240px);
@@ -611,7 +611,7 @@ body:has(.floatingCallback) footer {
 }
 
 .headerLocationList { display: flex; flex-wrap: wrap; gap: 10px 24px; }
-.headerLocations > summary, .mobileMenuToggle, .mobileCall, .filterToggle,
+.headerLocations > summary, .mobileMenuToggle, .mobileCall,
 .showroomMapPanel > summary, .tileAddIcon, .mobilePurchase { display: none; }
 .catalogToolbar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(200px, 26%); gap: 10px; margin-bottom: 12px; }
 .activeFilters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
@@ -626,7 +626,7 @@ body:has(.floatingCallback) footer {
 .gallerySchemeChoice span { position: absolute; inset: auto 0 0; padding: 2px; font-size: .75rem; color: var(--ink); background: #fffcf7ee; }
 @media (max-width: 760px) {
   .headerContacts { display: flex; flex-wrap: wrap; gap: 8px; }
-  .headerCity, .headerContactActions .headerPhone, #catalogFiltersTitle { display: none; }
+  .headerCity, .headerContactActions .headerPhone { display: none; }
   .headerLocations > summary, .showroomMapPanel > summary { display: list-item; cursor: pointer; }
   .headerLocations > summary { padding-block: 8px; }
   .headerLocations[open] { flex-basis: 100%; }
@@ -636,12 +636,12 @@ body:has(.floatingCallback) footer {
   .siteHeader .logo { justify-self: center; }
   .siteHeader .cartButton { grid-column: 4; }
   .cartButton > span:not(#count) { display: none; }
-  .mobileMenuToggle, .mobileCall, .filterToggle { display: inline-grid; place-items: center; min-height: 44px; }
+  .mobileMenuToggle, .mobileCall { display: inline-grid; place-items: center; min-height: 44px; }
   .mobileMenuToggle { grid-column: 1; padding-inline: 8px; font-weight: 500; }
   .mobileCall { grid-column: 3; min-width: 36px; font-size: 1.25rem; }
-  #siteNav:not(.is-open), #catalogFilters:not(.is-open) { display: none; }
+  #siteNav:not(.is-open) { display: none; }
   #siteNav.is-open { border-bottom: 1px solid var(--line); }
-  .catalogToolbar { grid-template-columns: minmax(0,1fr) auto; }
+  .catalogToolbar { grid-template-columns: minmax(0,1fr); }
   .catalogToolbar select { grid-column: 1 / -1; }
   .filterChip, .filterReset { min-height: 44px; }
   .showroomMapPanel { margin-top: 12px; }
@@ -763,13 +763,12 @@ body:has(.floatingCallback) footer {
 
 .catalogHead { align-items: center; }
 #catalogCategoryPhoto { width: 58px; height: 48px; object-fit: contain; padding: 3px; background: white; border: 1px solid #927354; border-radius: 7px; }
-.catalogToolbar { grid-template-columns: minmax(0,1fr) auto minmax(0, 220px); }
+.catalogToolbar { grid-template-columns: minmax(0,1fr) minmax(0,220px); }
 .catalogToolbar :is(input,select), #catalogFilters :is(input,select) { min-height: 44px; border-radius: 10px; }
-.catalogToolbar .filterToggle { display: inline-grid; align-items: center; min-height: 44px; font-weight: 600; border-radius: 10px; }
-#catalogFilters:not(.is-open) { display: none; }
-#catalogFilters.is-open { padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #f1ece4; }
-#filterResults { grid-column: 1 / -1; justify-self: end; min-height: 44px; border-radius: 10px; }
-#catalogStatus { margin: 8px 0 14px; color: #64594e; font-size: .875rem; }
+#catalogFilters { padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #f1ece4; }
+.catalogResults { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 6px 0 12px; min-height: 36px; }
+.catalogResults .filterReset { border: 0; padding-inline: 0; font-size: .875rem; white-space: nowrap; }
+#catalogStatus { margin: 0; color: #64594e; font-size: .875rem; }
 
 .products { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .products .product { border: 0; background: transparent; }
@@ -827,7 +826,7 @@ body:has(.floatingCallback) footer {
   .bannerTrack .heroImage { min-height: clamp(122px, 38vw, 220px); }
   .bannerControls { inset: auto 8px 8px auto; }
   #shopfront { margin-block: 22px; }
-  .catalogToolbar { grid-template-columns: minmax(0,1fr) auto; }
+  .catalogToolbar { grid-template-columns: minmax(0,1fr); }
   .products { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
   .products .info h3 { font-size: .9rem; }
 }
@@ -843,4 +842,96 @@ body:has(.floatingCallback) footer {
 @media (max-width: 500px) {
   .warrantyTable :is(th,td) { padding: 8px; }
   .warrantyTable tbody th { overflow-wrap: anywhere; }
+}
+
+/* Contact strip */
+.headerContacts {
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  min-height: 68px;
+  padding-block: 0;
+  background: #eee7dd;
+}
+.headerContacts :is(.headerCity,.headerShowroom,.headerPhone) {
+  display: flex;
+  align-items: center;
+  padding: 12px clamp(11px, 1.8vw, 27px);
+}
+.headerContacts .headerShowroom {
+  display: grid;
+  align-content: center;
+  border-inline-start: 1px solid #d8cbbd;
+}
+.headerContacts :is(.headerCity,.headerPhone) { gap: 9px; }
+.headerContacts .headerCity { padding-inline-start: 0; }
+.headerContacts .headerPhoneGroup {
+  display: grid;
+  align-content: center;
+  row-gap: 4px;
+  padding: 8px 0 8px clamp(11px, 1.8vw, 27px);
+  border-inline-start: 1px solid #d8cbbd;
+}
+.headerContacts .headerPhone { padding: 0; text-decoration: none; }
+.headerPhoneGroup { --phone-text-offset: 29px; }
+.headerMessagePhone, .headerMessageNote { margin-inline-start: var(--phone-text-offset); }
+.headerMessagePhone { justify-self: start; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.headerMessageNote { color: #63574d; font-size: .72rem; white-space: nowrap; }
+.headerContacts .headerPhone:hover strong, .headerContacts .headerShowroom a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.headerContacts svg { color: #79563d; flex: none; }
+.headerContacts .headerShowroom a { font-weight: 650; text-decoration: none; }
+.headerContacts .headerContactNote { display: block; margin-top: 3px; color: #63574d; font-size: .72rem; }
+.headerContacts .headerLocations > summary { display: none; }
+.headerContacts .headerLocationList {
+  position: static;
+  display: flex;
+  gap: 0;
+  width: auto;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.headerContacts .headerLocations { display: flex; }
+.headerContacts .headerLocations::details-content { display: flex; }
+
+@media (max-width: 1080px) {
+  .headerContacts { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: start; gap: 4px 8px; min-height: 44px; }
+  .headerContacts .headerCity { display: none; }
+  .headerContacts .headerLocations { display: block; }
+  .headerContacts .headerLocations::details-content { display: block; }
+  .headerContacts .headerLocations > summary {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 44px;
+    padding: 0;
+    list-style: none;
+    font-size: .75rem;
+    font-weight: 600;
+  }
+  .headerContacts .headerLocations > summary::-webkit-details-marker { display: none; }
+  .headerContacts .headerLocations > summary::after { content: ''; width: 6px; height: 6px; border: solid currentColor; border-width: 0 1px 1px 0; transform: rotate(45deg); margin-inline-start: 2px; }
+  .headerContacts .headerLocations[open] > summary::after { transform: rotate(225deg); }
+  .headerContacts .headerLocationList { display: grid; }
+  .headerContacts .headerShowroom { border: 0; padding: 0 0 11px 23px; }
+  .headerContacts .headerShowroom span { white-space: normal; }
+  .headerContacts .headerPhoneGroup { --phone-text-offset: 20px; grid-column: 2; justify-self: end; padding: 5px 0; border: 0; row-gap: 2px; }
+  .headerContacts .headerMessagePhone { font-size: .75rem; }
+  .headerContacts .headerMessageNote { font-size: .625rem; }
+  .headerContacts .headerPhone {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    min-height: 22px;
+    gap: 5px;
+    border: 0;
+    font-size: .75rem;
+  }
+  .headerContacts .headerPhone .headerContactNote { display: none; }
+  .headerContacts .headerPhone svg { width: 15px; height: 15px; }
+}
+@media (max-width: 760px) {
+  .storeNavigation .siteHeader { grid-template-columns: auto minmax(0,1fr) auto; }
+  .storeNavigation .siteHeader .cartButton { grid-column: 3; }
 }
