@@ -457,12 +457,15 @@ function resetCatalogPrice() {
   byId('priceFrom').value = '';
   byId('priceTo').value = '';
 }
-function showSelection(brand, category = '', collection = '') {
+function setCatalogSelection(brand, category, collection) {
   byId('search').value = '';
   resetCatalogPrice();
   byId('catalogSort').value = '';
   byId('category').value = category;
   refreshCatalog(true,collection,brand);
+}
+function showSelection(brand, category = '', collection = '') {
+  setCatalogSelection(brand,category,collection);
   byId('catalog').scrollIntoView();
 }
 function initCatalog() {
@@ -1009,6 +1012,7 @@ document.addEventListener('click',event => {
   if (!event.target.closest('[data-home-link]')) return;
   event.preventDefault();
   catalogReturn = null;
+  setCatalogSelection('','','');
   if (location.hash !== '#top') location.hash = '#top';
   window.scrollTo({top:0,behavior:'instant'});
 });
