@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Сантехника Boheme, мебель для ванной Armadi Art и консультация по подбору."><title>Boheme и Armadi Art — сантехника и мебель для ванной</title><link rel="stylesheet" href="style.css?v=80"><script defer src="product-videos.js?v=2"></script><script defer src="app.js?v=80"></script><script defer src="showroom-map.js"></script></head>
+<body>
+<div id="top" class="headerContacts" aria-label="Адреса, часы работы и телефон шоурумов">
+  <details class="headerLocations" id="headerLocations">
+    <summary>г. Нижний Новгород · 2 шоурума</summary>
+    <div class="headerLocationList">
+  <div class="headerShowroom">
+    <a href="#showroom-gagarina">пр. Гагарина, 56</a>
+    <span>Пн–пт 10:00–19:00</span>
+    <span>Сб 10:00–18:00</span>
+    <span>Вс — выходной</span>
+  </div>
+  <div class="headerShowroom">
+    <a href="#showroom-beketova">ул. Бекетова, 13</a>
+    <span>СЦ «Бекетов», 2-й этаж</span>
+    <span>Ежедневно 10:00–20:00</span>
+  </div>
+    </div>
+  </details>
+  <div class="headerContactActions">
+    <a class="headerPhone" href="tel:+78314237557">+7 831 423-75-57</a>
+  </div>
+</div>
+<div class="storeNavigation"><header class="siteHeader"><button class="mobileMenuToggle outline" type="button" id="mobileMenuToggle" aria-controls="siteNav" aria-expanded="false" aria-label="Меню"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><a class="logo brandLockup" href="#top" aria-label="Boheme и Armadi Art — главная"><img src="boheme-logo.svg" alt="Boheme"><img src="armadi-art-logo.png" alt="Armadi Art"></a><a class="mobileCall" href="tel:+78314237557" aria-label="Позвонить в магазин"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M7 3 4 5c0 8 7 15 15 15l2-3-4-3-2 2c-3-1-6-4-7-7l2-2z"/></svg></a><button id="basket" aria-label="Корзина" class="outline cartButton" type="button">
+  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 4h2l2.3 11h11.4l2-7H6"/>
+    <circle cx="9" cy="19" r="1"/>
+    <circle cx="17" cy="19" r="1"/>
+  </svg>
+  <span id="count" hidden></span>
+</button></header>
+<nav id="siteNav" class="siteNav" aria-label="Разделы сайта"><a href="#boheme">Boheme</a><a href="#armadi-art">Armadi Art</a><a href="#about">О нас</a><a href="#showrooms">Шоурумы</a><a href="#warranty">Гарантия</a><a href="#service-center">Сервисный центр</a>
+  <details class="pdfCatalogMenu">
+    <summary>Каталоги PDF</summary>
+    <div class="pdfCatalogLinks">
+      <a href="https://boheme.su/upload/iblock/806/0qn6hs6c7k7r61r75bixtjyobo1zm10y/Katalog_Boheme_2025_Modern_Part_1_18.07.25.pdf" target="_blank" rel="noopener">Boheme Modern · PDF</a>
+      <a href="https://boheme.su/upload/iblock/846/qyrhz1ur9c2a9v02822qudz2p01xtn2r/Katalog_Boheme_2025_Classic.pdf" target="_blank" rel="noopener">Boheme Classic · PDF</a>
+    </div>
+  </details>
+</nav></div>
+<main>
+<section id="productPage" class="wrap" aria-labelledby="detailTitle" hidden>
+  <nav id="productBreadcrumbs" class="productBreadcrumbs" aria-label="Хлебные крошки" hidden>
+    <ol>
+      <li><a href="#home">Главная</a></li>
+      <li><a href="#catalog?">Каталог</a></li>
+      <li><a id="breadcrumbCategory"></a></li>
+      <li id="breadcrumbProduct" aria-current="page"></li>
+    </ol>
+  </nav>
+  <a class="catalogReturn" id="catalogReturn" hidden>Вернуться к результатам</a>
+  <div id="productDetail"></div>
+</section>
+<section id="home" class="wrap brandBanners" aria-label="Баннеры брендов">
+  <div class="bannerTrack" id="bannerTrack" tabindex="0" aria-label="Листайте баннеры брендов">
+    <section class="hero" aria-label="Boheme">
+      <div class="heroCopy">
+        <p class="eyebrow">Сантехника для ванной</p>
+        <h1 class="heroBrand"><img src="boheme-logo.svg" alt="Boheme"></h1>
+        <p>Смесители, душевые гарнитуры, раковины и аксессуары для ванной.</p>
+        <a class="button" href="#catalog?brand=Boheme">Смотреть товары Boheme</a>
+      </div>
+      <div class="heroImage" role="img" aria-label="Современная ванная комната с отдельно стоящей ванной"></div>
+    </section>
+    <section class="hero heroArmadi" aria-label="Armadi Art">
+      <div class="heroCopy">
+        <p class="eyebrow">Мебель для ванной</p>
+        <h2 class="heroBrand"><img src="armadi-art-logo.png" alt="Armadi Art"></h2>
+        <p>Тумбы, раковины и зеркала для ванной комнаты.</p>
+        <a class="button" href="#catalog?brand=Armadi+Art">Смотреть товары Armadi Art</a>
+      </div>
+      <div class="heroImage" role="img" aria-label="Интерьер ванной с тумбой из тёмного дерева, раковиной и зеркалом"></div>
+    </section>
+  </div>
+  <div class="bannerControls" id="bannerControls" hidden>
+    <button type="button" class="bannerArrow" data-banner-step="-1" aria-label="Предыдущий баннер">‹</button>
+    <span id="bannerPosition" aria-label="Текущий баннер">1 / 2</span>
+    <button type="button" class="bannerArrow" data-banner-step="1" aria-label="Следующий баннер">›</button>
+    <button type="button" id="bannerPause" aria-label="Остановить автопрокрутку" title="Остановить автопрокрутку">
+      <span class="bannerPauseIcon" aria-hidden="true"></span>
+    </button>
+  </div>
+</section>
+<section id="shopfront" class="wrap" aria-labelledby="shopfrontTitle" hidden>
+  <div class="sectionHead"><h2 id="shopfrontTitle">Категории</h2><a href="#catalog" id="shopfrontAll">Весь ассортимент</a></div>
+  <div id="shopfrontCategories" class="shopfrontCategories"></div>
+</section>
+<section id="catalog" class="wrap"><div class="catalogHead">
+  <img id="catalogCategoryPhoto" alt="" hidden>
+  <h2 id="catalogTitle">Каталог</h2>
+</div><div class="catalogToolbar">
+  <input id="search" type="search" placeholder="Название или артикул" aria-label="Поиск по каталогу">
+  <button type="button" class="outline filterToggle" id="filterToggle" aria-expanded="false" aria-controls="catalogFilters">Фильтры</button>
+  <select id="catalogSort" aria-label="Сортировка">
+    <option value="">Рекомендуемый порядок</option>
+    <option value="asc">Сначала дешевле</option>
+    <option value="desc">Сначала дороже</option>
+  </select>
+</div>
+<div id="activeFilters" class="activeFilters" aria-label="Выбранные фильтры" hidden></div>
+<div id="catalogFilters" class="filters" role="group" aria-label="Фильтры"><select id="priceRange" aria-label="Цена, ₽">
+  <option value="">Любая цена</option>
+  <option value="low">До 10 000 ₽</option>
+  <option value="mid">10 000–30 000 ₽</option>
+  <option value="high">Свыше 30 000 ₽</option>
+  <option value="custom">Свой диапазон</option>
+</select>
+<div id="customPrice" class="customPrice" role="group" aria-label="Свой диапазон цен" hidden>
+  <input id="priceFrom" type="number" min="0" inputmode="numeric" placeholder="От, ₽" aria-label="Цена от, ₽" aria-describedby="priceError">
+  <input id="priceTo" type="number" min="0" inputmode="numeric" placeholder="До, ₽" aria-label="Цена до, ₽" aria-describedby="priceError">
+  <p id="priceError" role="status" hidden>Укажите цены в целых рублях. Цена «До» должна быть не меньше цены «От».</p>
+</div>
+<select id="category" aria-label="Категория"></select><select id="brand" aria-label="Бренд"></select><select id="collection" aria-label="Коллекция" hidden></select><select id="color" aria-label="Цвет" hidden></select><select id="type" aria-label="Вид товара" hidden></select><button type="button" id="filterResults" class="button">Показать товары</button></div><p id="catalogStatus" role="status">Загружаем ассортимент…</p><div id="products" class="products"></div><p id="empty" hidden>Товары не найдены.</p><button id="moreProducts" class="outline" type="button" hidden>Показать ещё</button></section>
+<section id="brands" class="wrap">
+  <div class="sectionHead"><h2>Каталоги брендов</h2><a id="allProducts" href="#catalog">Весь ассортимент</a></div>
+  <div id="brandCards" class="brands brandDirectories"></div>
+</section>
+<section id="about" class="wrap" aria-labelledby="about-title">
+  <h2 id="about-title">О нас</h2>
+  <div class="aboutCopy">
+    <p>Продукция брендов <strong>Boheme</strong> и <strong>Armadi Art</strong> представлена в сети салонов <strong>KOTTO design</strong> в г. Нижнем Новгороде.</p>
+    <p>Мы представляем сантехнику <strong>Boheme</strong> и мебель для ванной <strong>Armadi Art</strong> в г. Нижнем Новгороде. Вы можете выбрать товары на сайте, а перед заказом приехать в шоурум, чтобы посмотреть изделия вживую, сравнить оттенки и обсудить комплектацию.</p>
+    <p><strong>Boheme</strong> — основной бренд нашего магазина. В каталоге есть смесители, душевые гарнитуры, раковины, санфаянс и аксессуары. В зависимости от модели изделия выпускаются в Италии или Турции. Поможем подобрать сантехнику и аксессуары в одной отделке.</p>
+    <p><strong>Armadi Art</strong> — мебель для ванной, раковины и зеркала. Фабрика бренда находится в Балыкесире, Турция. Поможем подобрать тумбу под размеры вашей ванной и собрать комплект с раковиной и зеркалом.</p>
+    <h3>Шоурумы KOTTO design в г. Нижнем Новгороде</h3>
+    <ul>
+      <li><strong>Флагманский шоурум</strong> — проспект Гагарина, 56.</li>
+      <li><strong>Шоурум в СЦ «Бекетов»</strong> — улица Бекетова, 13, 2-й этаж.</li>
+    </ul>
+  </div>
+</section>
+<section id="showrooms" class="wrap" aria-labelledby="showrooms-title">
+  <h2 id="showrooms-title">Шоурумы в г. Нижнем Новгороде</h2>
+  <div class="showroomGrid">
+    <article id="showroom-gagarina" class="showroom">
+      <h3>Флагманский шоурум</h3>
+      <p>Проспект Гагарина, 56</p>
+      <p><strong>График работы</strong><br>Пн–пт 10:00–19:00<br>Сб 10:00–18:00<br>Вс — выходной</p>
+      <a target="_blank" rel="noopener" href="https://yandex.ru/maps/?rtext=~56.288643,43.982333&amp;rtt=auto" aria-label="Проспект Гагарина, 56 — построить маршрут в новой вкладке">Построить маршрут</a>
+    </article>
+    <article id="showroom-beketova" class="showroom">
+      <h3>Шоурум в СЦ «Бекетов»</h3>
+      <p>Улица Бекетова, 13, 2-й этаж</p>
+      <p><strong>График работы</strong><br>Ежедневно 10:00–20:00</p>
+      <a target="_blank" rel="noopener" href="https://yandex.ru/maps/?rtext=~56.290609,43.998126&amp;rtt=auto" aria-label="Улица Бекетова, 13 — построить маршрут в новой вкладке">Построить маршрут</a>
+    </article>
+  </div>
+  <details class="showroomMapPanel" id="showroomMapPanel" open>
+    <summary>Показать на карте</summary>
+  <div id="showroomMapControls" class="showroomMapControls" role="group" aria-label="Выбрать шоурум на карте" hidden>
+    <button type="button" class="outline" aria-pressed="true">Оба адреса</button>
+    <button type="button" class="outline" aria-pressed="false" data-location="43.982333,56.288643">пр. Гагарина, 56</button>
+    <button type="button" class="outline" aria-pressed="false" data-location="43.998126,56.290609">ул. Бекетова, 13</button>
+  </div>
+  <iframe
+    id="showroomMap"
+    class="showroomMap"
+    title="Яндекс Карты — два шоурума KOTTO design в г. Нижнем Новгороде"
+    src="https://yandex.ru/map-widget/v1/?ll=43.990230%2C56.289626&amp;z=14&amp;l=map&amp;pt=43.982333%2C56.288643%2Cpm2blm1~43.998126%2C56.290609%2Cpm2blm2"
+    loading="lazy"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+  ></iframe>
+  </details>
+</section>
+<section id="subscribe" class="wrap socialSubscribe" aria-labelledby="subscribe-title">
+  <div>
+    <h2 id="subscribe-title">KOTTO design в MAX и Telegram</h2>
+    <p>Подписывайтесь, чтобы узнавать о новых коллекциях и видеть, как сантехника и мебель смотрятся в интерьере.</p>
+  </div>
+  <div class="socialSubscribeLinks">
+    <a class="outline" href="https://max.ru/channel_kotto_design" target="_blank" rel="noopener"><img src="max-icon.svg" alt="" width="18" height="18">Подписаться в MAX</a>
+    <a class="outline" href="https://t.me/kottodesign" target="_blank" rel="noopener"><img src="telegram-icon.svg" alt="" width="18" height="18">Подписаться в Telegram</a>
+  </div>
+</section>
+<section id="warranty" class="wrap serviceCenter" aria-labelledby="warranty-title">
+  <h2 id="warranty-title">Гарантия</h2>
+  <p>Гарантийный срок зависит от артикула, покрытия и комплектации. Перед покупкой его можно уточнить у нас по артикулу товара. Условия для выбранной модели указаны в паспорте или гарантийном талоне.</p>
+  <table class="warrantyTable">
+    <thead><tr><th scope="col">Изделие</th><th scope="col">Срок и источник</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Boheme · полотенцесушители 722 и 723</th><td>10 лет на изделие по паспорту производителя. На заглушки, прокладки, эксцентрики и вентили этот срок не распространяется. <a href="https://www.santehnica.ru/files/attachments/products/8/6/8627211-722-723-pasport-polotentsesushitelya.pdf">Паспорт Boheme</a></td></tr>
+      <tr><th scope="row">Boheme · смесители и комплектующие</th><td>По справочным данным профильного продавца, 5 лет на смеситель и керамический картридж или кран-буксу, 2 года на цветное покрытие, 1 год на отдельные комплектующие и элементы душевой группы. Перед заказом уточняйте срок по артикулу. <a href="https://boheme-butik.ru/help/warranty/">Условия Boheme Бутик</a></td></tr>
+      <tr><th scope="row">Boheme · раковина Glow Olive 810-G-OL</th><td>В карточке профильного продавца указано 5 лет. Срок для других моделей Glow уточняется отдельно. <a href="https://santehnika-online.ru/product/rakovina_kruglaya_poliefirnaya_810_g_ol/1197344/">Карточка 810-G-OL</a></td></tr>
+      <tr><th scope="row">Другие изделия Boheme и Armadi Art</th><td>Для мебели, зеркал, санфаянса, инсталляций и других товаров уточняем гарантию по артикулу и паспорту изделия.</td></tr>
+    </tbody>
+  </table>
+  <p>Чтобы обратиться по гарантии, сообщите продавцу артикул, номер заказа и опишите проблему. Можно приложить фото или видео.</p>
+  <div class="serviceCenterLinks">
+    <a class="outline" href="tel:+78314237557">Уточнить срок по артикулу</a>
+    <a class="outline" href="#service-center">Сервисный центр</a>
+    <a class="outline" href="./legal.html#terms">Условия возврата</a>
+  </div>
+</section>
+<section id="service-center" class="wrap serviceCenter" aria-labelledby="service-center-title">
+  <h2 id="service-center-title">Сервисный центр</h2>
+  <p>Сервисный центр Boheme и Armadi Art принимает обращения по продукции обоих брендов. Выберите форму и приложите к обращению видео, на котором видна проблема.</p>
+  <div class="serviceCenterLinks">
+    <a class="outline" href="https://forms.yandex.ru/cloud/623307cf81f370e5d9ed61b4/" target="_blank" rel="noopener">Форма для розничных покупателей</a>
+    <a class="outline" href="https://forms.yandex.ru/cloud/626a4e06700ced1c9ac07d56/" target="_blank" rel="noopener">Форма для оптовых партнёров</a>
+  </div>
+  <p>Сервисный центр подтвердит получение обращения в течение 48 часов и постарается принять решение в течение 5 рабочих дней.</p>
+  <p>Если у вас есть вопросы по установке или нужна помощь с заполнением формы, позвоните в сервисный центр по номеру <a class="serviceCenterPhone" href="tel:+78005504070">8 800 550-40-70</a>.</p>
+</section>
+</main>
+<footer><a class="logo brandLockup" href="#top" aria-label="Boheme и Armadi Art — главная"><img src="boheme-logo.svg" alt="Boheme"><img src="armadi-art-logo.png" alt="Armadi Art"></a><nav class="legalLinks" aria-label="Информация о магазине">
+  <a href="#warranty">Гарантия</a>
+  <a href="./legal.html#seller">Реквизиты продавца</a>
+  <a href="./legal.html#terms">Оплата, доставка и возврат</a>
+  <a href="./legal.html#privacy">Политика обработки персональных данных</a>
+</nav></footer>
+<dialog id="cartDialog"><form method="dialog" class="close"><button class="requestClose" aria-label="Закрыть"></button></form><h2 id="cartTitle">Корзина</h2><div id="cartItems"></div><p id="total"></p><form id="request" hidden><h3>Заявка на обратный звонок</h3><p id="requestProduct" hidden></p><label>Имя<input name="customer" autocomplete="name" required maxlength="100"></label><label>Телефон<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30"></label><label>Комментарий<textarea name="comment" rows="2" maxlength="500"></textarea></label><p class="note">Для проверки формы используйте условный номер. Данные из демоверсии не отправляются менеджеру.</p><p class="note"><a href="./legal.html#privacy" target="_blank" rel="noopener">Политика обработки персональных данных</a></p><button class="button">Проверить заявку</button> <a class="outline" href="tel:+78314237557">Позвонить в магазин</a></form><p id="requestStatus" role="status"></p></dialog>
+<dialog id="mediaDialog" aria-labelledby="mediaTitle">
+  <div class="mediaHeader">
+    <h2 id="mediaTitle">Просмотр изображения</h2>
+    <form method="dialog" class="close"><button class="mediaClose" aria-label="Закрыть просмотр"></button></form>
+  </div>
+  <div class="mediaStage">
+    <p id="mediaError" role="status" hidden>Не удалось загрузить изображение.</p>
+    <img id="mediaImage" alt="">
+    <div class="mediaNavigation" id="mediaNavigation" hidden>
+      <button type="button" id="mediaPrevious" class="mediaArrow" aria-label="Предыдущее изображение"></button>
+      <button type="button" id="mediaNext" class="mediaArrow" aria-label="Следующее изображение"></button>
+    </div>
+  </div>
+  <span id="mediaPosition" role="status"></span>
+  <a id="mediaOriginal" target="_blank" rel="noopener">Открыть оригинал</a>
+</dialog>
+<button type="button" class="button floatingCallback" data-consultation aria-haspopup="dialog" aria-controls="cartDialog">Заказать звонок</button>
+<a id="backToTop" class="backToTop" href="#top" aria-label="Наверх" title="Наверх"></a>
+<p id="toast" role="status" hidden></p>
+</body></html>
