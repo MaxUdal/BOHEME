@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Обновление каталога — Boheme и Armadi Art</title>
+<style>
+*{box-sizing:border-box}body{font:16px/1.55 system-ui,sans-serif;background:#f8f5ef;color:#29241e;margin:0}main{max-width:860px;margin:auto;padding:24px 5vw 60px}h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:clamp(2rem,6vw,3rem);margin:22px 0}h2{margin:0 0 14px}section{padding:20px;background:#fff;border:1px solid #ddd1c2;margin-top:16px}form,label{display:grid;gap:8px}form+form{margin-top:20px}input,button{font:inherit}input:not([type=checkbox]){min-width:0;width:100%;padding:10px;border:1px solid #bfb3a5}button{min-height:44px;padding:8px 14px;border:1px solid #bfb3a5;background:#f8f5ef;color:inherit;cursor:pointer}button:disabled{opacity:.6;cursor:default}button.primary{color:white;background:#41332a}a{color:inherit;text-underline-offset:3px}.actions{display:flex;flex-wrap:wrap;gap:8px}.check{display:flex;align-items:baseline;gap:8px;margin:12px 0}.check input{flex:none}#status{min-height:1.55em}#status[data-error=true]{color:#9a2924}.history{padding:0;margin:0;list-style:none}.history li{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid #ddd1c2}.history li:last-child{border-bottom:0}
+</style>
+<script src="/admin-panel.js?v=2" defer></script>
+</head>
+<body><main>
+<a href="/">К магазину</a>
+<h1>Обновление каталога</h1>
+<p id="live">Загружаем состояние…</p>
+<p id="status" role="status"></p>
+<section aria-labelledby="source-title">
+<h2 id="source-title">Источник</h2>
+<form id="source-form">
+<label for="source">Прямая HTTPS-ссылка на Excel</label><input type="url" id="source" placeholder="https://example.com/catalog.xlsx" autocomplete="off">
+<div class="actions"><button type="submit">Сохранить ссылку</button><button type="button" id="check">Проверить сейчас</button></div>
+</form>
+<form id="upload-form">
+<label for="file">Загрузить выгрузку вручную</label><input type="file" id="file" accept=".xlsx" required>
+<div class="actions"><button type="submit">Проверить файл</button></div>
+</form>
+<p id="checked"></p>
+</section>
+<section id="draft" aria-labelledby="draft-title" hidden>
+<h2 id="draft-title">Изменения в выгрузке</h2>
+<p id="changes"></p>
+<p id="skipped"></p>
+<details id="missing-list" hidden><summary>Позиции, которых нет в выгрузке</summary><ul id="examples"></ul></details>
+<label class="check"><input type="checkbox" id="remove-missing"> Скрыть отсутствующие позиции. Выбирайте для полной выгрузки.</label>
+<button type="button" id="publish" class="primary">Опубликовать каталог</button>
+</section>
+<section aria-labelledby="history-title"><h2 id="history-title">Версии каталога</h2><ul id="history" class="history"></ul></section>
+<section aria-labelledby="video-upload-title">
+<h2 id="video-upload-title">Обновление видео товаров</h2>
+<form id="video-upload-form">
+<label for="video-files">Файлы MP4 с номерами роликов, например 669.mp4</label>
+<input id="video-files" type="file" accept=".mp4,video/mp4" multiple required>
+<div class="actions"><button type="submit">Загрузить видео</button></div>
+<p id="video-upload-status" role="status"></p>
+</form>
+</section>
+</main></body></html>
